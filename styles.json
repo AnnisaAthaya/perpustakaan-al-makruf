@@ -1,0 +1,56 @@
+{
+    "app_name": "Perpustakaan MA Al-Ma'ruf Margodadi",
+    "app_short_name": "MA Al-Ma'ruf",
+    "theme": {
+        "primary_color": "oklch(59.6% 0.145 163.225)",
+        "primary_color_hex": "#0d9668",
+        "secondary_color": "oklch(94.5% 0.038 163.225)",
+        "secondary_color_hex": "#d1fae5",
+        "accent_color": "oklch(52.0% 0.135 163.225)",
+        "accent_color_hex": "#047857",
+        "border_radius": "8px",
+        "font_family": "Inter, sans-serif",
+        "color_palette": {
+            "emerald-50": "oklch(97.8% 0.018 163.225)",
+            "emerald-100": "oklch(94.5% 0.038 163.225)",
+            "emerald-200": "oklch(89.2% 0.068 163.225)",
+            "emerald-300": "oklch(81.5% 0.098 163.225)",
+            "emerald-400": "oklch(72.0% 0.125 163.225)",
+            "emerald-500": "oklch(59.6% 0.145 163.225)",
+            "emerald-600": "oklch(52.0% 0.135 163.225)",
+            "emerald-700": "oklch(44.5% 0.118 163.225)",
+            "emerald-800": "oklch(37.0% 0.095 163.225)",
+            "emerald-900": "oklch(30.0% 0.072 163.225)",
+            "emerald-950": "oklch(22.0% 0.048 163.225)"
+        }
+    },
+    "ui_preferences": {
+        "dark_mode": false,
+        "style_rules": [
+            "Gunakan CSS variables dari app.css (--primary, --secondary, dll) bukan hardcode warna.",
+            "Gunakan soft shadow 'shadow-soft' atau 'shadow-soft-md' daripada border yang tajam.",
+            "Gunakan warna emerald sebagai elemen aksi utama via 'bg-primary', 'text-primary'.",
+            "Padding halaman minimal p-4 untuk mobile dan p-8 untuk desktop.",
+            "Form input harus memiliki background 'bg-muted' atau putih dengan border 'border-primary' saat fokus.",
+            "Tombol (Button) harus memiliki efek hover yang halus dan sedikit scaling.",
+            "Gunakan komponen Card dengan 'bg-card' dan 'border-border'.",
+            "Untuk variasi warna, gunakan 'bg-emerald-{50-950}' atau 'text-emerald-{50-950}'."
+        ],
+        "anti_ai_look_instructions": [
+            "Hindari layout dashboard standar yang membosankan.",
+            "Gunakan whitespace (jarak antar elemen) yang luas agar desain terlihat premium.",
+            "Gunakan tipografi dengan berat (weight) yang bervariasi untuk menciptakan hierarki informasi.",
+            "Pastikan semua tabel di mobile berubah menjadi bentuk card yang mudah di-scroll."
+        ]
+    },
+    "component_structure": {
+        "ui_library": "resources/js/components/ui",
+        "custom_components_path": "resources/js/components/generated-components",
+        "naming_convention": "kebab-case"
+    },
+    "utility_classes": {
+        "shadows": ["shadow-soft", "shadow-soft-md", "shadow-soft-lg"],
+        "gradients": ["bg-gradient-primary", "bg-gradient-primary-light", "text-gradient-primary"],
+        "effects": ["hover-scale"]
+    }
+}
