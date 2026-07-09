@@ -89,9 +89,9 @@ return [
     */
 
     'disks_by_type' => [
-        'book_cover' => env('STORAGE_BOOK_COVER_DISK', 'supabase'),
-        'qris_image' => env('STORAGE_QRIS_IMAGE_DISK', 'supabase'),
-        'payment_proof' => env('STORAGE_PAYMENT_PROOF_DISK', 'supabase'),
+        'book_cover' => env('STORAGE_BOOK_COVER_DISK', 'public'),
+        'qris_image' => env('STORAGE_QRIS_IMAGE_DISK', 'public'),
+        'payment_proof' => env('STORAGE_PAYMENT_PROOF_DISK', 'public'),
     ],
 
     /*

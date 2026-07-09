@@ -182,26 +182,34 @@ export default function Index({ books, categories, filters, userStats }: PagePro
     }, []);
 
     const handleToggleFavorite = useCallback((bookId: number) => {
+        if (selectedBook && selectedBook.id === bookId) {
+            selectedBook.is_favorited = !selectedBook.is_favorited;
+        }
         router.post(
             `/books/${bookId}/favorite`,
             {},
             {
                 preserveScroll: true,
                 preserveState: true,
+                only: ['books'],
             },
         );
-    }, []);
+    }, [selectedBook]);
 
     const handleToggleSave = useCallback((bookId: number) => {
+        if (selectedBook && selectedBook.id === bookId) {
+            selectedBook.is_saved = !selectedBook.is_saved;
+        }
         router.post(
             `/books/${bookId}/save`,
             {},
             {
                 preserveScroll: true,
                 preserveState: true,
+                only: ['books'],
             },
         );
-    }, []);
+    }, [selectedBook]);
 
     const RightSidebarContent = () => (
         <>

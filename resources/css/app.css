@@ -7,7 +7,7 @@
 @theme {
     --font-sans:
         'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-serif: 'Lora', ui-serif, Georgia, serif;
+    --font-serif: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 @theme inline {
@@ -196,8 +196,8 @@
         border-left: 3px solid oklch(55% 0.22 27);
     }
 
-    /* Font serif utility */
+    /* Font serif override — forced to sans */
     .font-serif {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
     }
 }

@@ -1,13 +1,6 @@
-import React from 'react';
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-    DialogFooter,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
+import React from 'react';
 
 interface ModalShellProps {
     open: boolean;
@@ -41,26 +34,13 @@ export function ModalShell({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent
-                className={cn(sizeClasses[size], className)}
-                showCloseButton={showCloseButton}
-            >
+            <DialogContent className={cn(sizeClasses[size], className)} showCloseButton={showCloseButton}>
                 <DialogHeader>
-                    <DialogTitle className="font-serif text-xl">{title}</DialogTitle>
-                    {description && (
-                        <DialogDescription className="text-sm">
-                            {description}
-                        </DialogDescription>
-                    )}
+                    <DialogTitle className="text-xl font-semibold">{title}</DialogTitle>
+                    {description && <DialogDescription className="text-sm">{description}</DialogDescription>}
                 </DialogHeader>
-                <div className="py-4">
-                    {children}
-                </div>
-                {footer && (
-                    <DialogFooter>
-                        {footer}
-                    </DialogFooter>
-                )}
+                <div className="max-h-[65vh] overflow-y-auto py-4">{children}</div>
+                {footer && <DialogFooter>{footer}</DialogFooter>}
             </DialogContent>
         </Dialog>
     );
