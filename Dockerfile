@@ -53,4 +53,4 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 443/udp
 
-CMD ["php", "artisan", "octane:start", "--server=frankenphp", "--host=0.0.0.0", "--port=80"]
+CMD ["php", "artisan", "octane:start", "--server=frankenphp", "--host=0.0.0.0", "--port=80", "--admin-port=2019"]
