@@ -75,4 +75,12 @@ class Setting extends Model
     {
         return self::getValue('qris_image');
     }
+
+    /**
+     * Get welcome hero image path.
+     */
+    public static function getWelcomeHeroImage(): ?string
+    {
+        return self::getValue('welcome_hero_image');
+    }
 }

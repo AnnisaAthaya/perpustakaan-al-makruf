@@ -92,6 +92,7 @@ return [
         'book_cover' => env('STORAGE_BOOK_COVER_DISK', 'public'),
         'qris_image' => env('STORAGE_QRIS_IMAGE_DISK', 'public'),
         'payment_proof' => env('STORAGE_PAYMENT_PROOF_DISK', 'public'),
+        'welcome_hero_image' => env('STORAGE_WELCOME_HERO_IMAGE_DISK', 'public'),
     ],
 
     /*

@@ -11,6 +11,7 @@ interface SettingsData {
     fine_per_day: number;
     loan_duration_days: number;
     qris_image: string | null;
+    welcome_hero_image: string | null;
 }
 
 interface SettingsProps {
@@ -22,18 +23,25 @@ interface SettingsFormData {
     loan_duration_days: number;
     qris_image: File | null;
     remove_qris: boolean;
+    welcome_hero_image: File | null;
+    remove_welcome_hero: boolean;
 }
 
 export default function SettingsPage({ settings }: SettingsProps) {
     const [qrisPreview, setQrisPreview] = useState<string | null>(settings.qris_image);
     const [isNewQris, setIsNewQris] = useState(false);
+    const [heroPreview, setHeroPreview] = useState<string | null>(settings.welcome_hero_image);
+    const [isNewHero, setIsNewHero] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const heroFileInputRef = useRef<HTMLInputElement>(null);
 
     const { data, setData, post, processing, errors, recentlySuccessful } = useForm<SettingsFormData>({
         fine_per_day: settings.fine_per_day,
         loan_duration_days: settings.loan_duration_days,
         qris_image: null,
         remove_qris: false,
+        welcome_hero_image: null,
+        remove_welcome_hero: false,
     });
 
     const handleSubmit = (e: FormEvent) => {
@@ -65,6 +73,30 @@ export default function SettingsPage({ settings }: SettingsProps) {
         setIsNewQris(false);
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
+        }
+    };
+
+    const handleHeroChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setData('welcome_hero_image', file);
+            setData('remove_welcome_hero', false);
+            setIsNewHero(true);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setHeroPreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const removeHero = () => {
+        setData('welcome_hero_image', null);
+        setData('remove_welcome_hero', true);
+        setHeroPreview(null);
+        setIsNewHero(false);
+        if (heroFileInputRef.current) {
+            heroFileInputRef.current.value = '';
         }
     };
 
@@ -260,6 +292,82 @@ export default function SettingsPage({ settings }: SettingsProps) {
                                     </div>
                                 </div>
                                 {errors.qris_image && <p className="text-sm text-destructive">{errors.qris_image}</p>}
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    {/* Welcome Hero Image Settings Card */}
+                    <Card>
+                        <CardHeader className="border-b border-border pb-6">
+                            <div className="flex items-center gap-3">
+                                <ImagePlus className="size-7 shrink-0 text-green-600" />
+                                <div>
+                                    <CardTitle>Gambar Hero Welcome</CardTitle>
+                                    <CardDescription>Gambar banner utama di halaman beranda perpustakaan</CardDescription>
+                                </div>
+                            </div>
+                        </CardHeader>
+
+                        <CardContent className="pt-6">
+                            <div className="space-y-4">
+                                <Label>Gambar Hero</Label>
+                                <div className="flex flex-col items-start gap-4 sm:flex-row">
+                                    {heroPreview ? (
+                                        <div className="relative">
+                                            <img
+                                                src={heroPreview}
+                                                alt="Hero Preview"
+                                                className="h-48 w-80 rounded-xl border border-border bg-white object-cover shadow-sm"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={removeHero}
+                                                className="absolute -top-2 -right-2 flex size-7 items-center justify-center rounded-full bg-destructive text-white shadow-md transition-transform hover:scale-110"
+                                            >
+                                                <X size={16} />
+                                            </button>
+                                            {isNewHero && (
+                                                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-white">
+                                                    Baru
+                                                </span>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            onClick={() => heroFileInputRef.current?.click()}
+                                            className="flex h-48 w-80 flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-border bg-muted/50 text-muted-foreground transition-all hover:border-primary hover:bg-primary/5 hover:text-primary"
+                                        >
+                                            <ImagePlus size={32} />
+                                            <span className="text-sm font-medium">Upload Gambar Hero</span>
+                                        </button>
+                                    )}
+                                    <input ref={heroFileInputRef} type="file" accept="image/*" onChange={handleHeroChange} className="hidden" />
+                                    <div className="flex-1 space-y-2">
+                                        <p className="text-sm text-muted-foreground">
+                                            Upload gambar hero yang ditampilkan di bagian atas halaman beranda perpustakaan.
+                                        </p>
+                                        <ul className="list-inside list-disc space-y-1 text-xs text-muted-foreground">
+                                            <li>Format: JPG, PNG, atau WebP</li>
+                                            <li>Ukuran maksimal: 2MB</li>
+                                            <li>Disarankan menggunakan gambar dengan rasio 16:9</li>
+                                            <li>Pastikan gambar berkualitas tinggi dan tidak buram</li>
+                                        </ul>
+                                        {heroPreview && (
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => heroFileInputRef.current?.click()}
+                                                className="mt-2"
+                                            >
+                                                <ImagePlus size={16} className="mr-2" />
+                                                Ganti Gambar
+                                            </Button>
+                                        )}
+                                    </div>
+                                </div>
+                                {errors.welcome_hero_image && <p className="text-sm text-destructive">{errors.welcome_hero_image}</p>}
                             </div>
                         </CardContent>
                     </Card>

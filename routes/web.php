@@ -49,7 +49,12 @@ Route::middleware('guest')->group(function () {
 // Beranda - accessible to guests and siswa only
 Route::middleware('redirect.admin')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('welcome');
+        $heroImage = \App\Models\Setting::getWelcomeHeroImage();
+        $heroUrl = $heroImage ? \App\Services\StorageService::url($heroImage, \App\Enums\FileType::WelcomeHeroImage) : null;
+
+        return Inertia::render('welcome', [
+            'welcome_hero_image' => $heroUrl,
+        ]);
     })->name('home');
 
     // Katalog Buku - accessible to guests and siswa (read-only)

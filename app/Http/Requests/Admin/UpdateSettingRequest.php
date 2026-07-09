@@ -26,6 +26,8 @@ class UpdateSettingRequest extends FormRequest
             'loan_duration_days' => ['required', 'integer', 'min:1', 'max:30'],
             'qris_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'remove_qris' => ['boolean'],
+            'welcome_hero_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'remove_welcome_hero' => ['boolean'],
         ];
     }
 
@@ -40,6 +42,7 @@ class UpdateSettingRequest extends FormRequest
             'fine_per_day' => 'Denda per hari',
             'loan_duration_days' => 'Durasi peminjaman',
             'qris_image' => 'Gambar QRIS',
+            'welcome_hero_image' => 'Gambar Hero Welcome',
         ];
     }
 
@@ -60,6 +63,9 @@ class UpdateSettingRequest extends FormRequest
             'qris_image.image' => 'File harus berupa gambar.',
             'qris_image.mimes' => 'Format gambar harus JPG, PNG, atau WebP.',
             'qris_image.max' => 'Ukuran gambar maksimal 2MB.',
+            'welcome_hero_image.image' => 'File harus berupa gambar.',
+            'welcome_hero_image.mimes' => 'Format gambar harus JPG, PNG, atau WebP.',
+            'welcome_hero_image.max' => 'Ukuran gambar maksimal 2MB.',
         ];
     }
 }

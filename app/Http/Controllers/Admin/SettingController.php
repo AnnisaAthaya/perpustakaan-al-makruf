@@ -20,6 +20,7 @@ class SettingController extends Controller
             'fine_per_day' => (int) Setting::getFinePerDay(),
             'loan_duration_days' => Setting::getLoanDurationDays(),
             'qris_image' => StorageService::url(Setting::getQrisImage(), FileType::QrisImage),
+            'welcome_hero_image' => StorageService::url(Setting::getWelcomeHeroImage(), FileType::WelcomeHeroImage),
         ];
 
         return Inertia::render('admin/settings/index', [
@@ -64,6 +65,35 @@ class SettingController extends Controller
                 Log::info('QRIS image updated successfully', [
                     'path' => $path,
                     'old_path' => $oldQris,
+                ]);
+            }
+
+            // Handle Welcome Hero image
+            if ($request->boolean('remove_welcome_hero')) {
+                $oldHero = Setting::getWelcomeHeroImage();
+                if ($oldHero) {
+                    StorageService::delete($oldHero, FileType::WelcomeHeroImage);
+                }
+                Setting::setValue('welcome_hero_image', '');
+            } elseif ($request->hasFile('welcome_hero_image')) {
+                // Delete old hero image if exists
+                $oldHero = Setting::getWelcomeHeroImage();
+                if ($oldHero) {
+                    StorageService::delete($oldHero, FileType::WelcomeHeroImage);
+                }
+
+                // Store new hero image
+                $path = StorageService::upload($request->file('welcome_hero_image'), FileType::WelcomeHeroImage);
+
+                if (! $path) {
+                    throw new \Exception('Upload gagal: path kosong setelah upload');
+                }
+
+                Setting::setValue('welcome_hero_image', $path);
+
+                Log::info('Welcome hero image updated successfully', [
+                    'path' => $path,
+                    'old_path' => $oldHero,
                 ]);
             }
 

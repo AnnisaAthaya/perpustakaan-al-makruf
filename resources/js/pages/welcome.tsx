@@ -6,9 +6,16 @@ import { SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { BookOpen, Eye, Flag, LogIn } from 'lucide-react';
 
-export default function Welcome() {
+interface WelcomeProps {
+    welcome_hero_image: string | null;
+}
+
+const DEFAULT_HERO_IMAGE = 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+
+export default function Welcome({ welcome_hero_image }: WelcomeProps) {
     const { auth } = usePage<SharedData>().props;
     const isAuthenticated = !!auth?.user;
+    const heroImage = welcome_hero_image || DEFAULT_HERO_IMAGE;
 
     return (
         <MainLayout>
@@ -25,7 +32,7 @@ export default function Welcome() {
                         <div className="mt-8 overflow-hidden rounded-2xl">
                             <div className="h-64 w-full bg-secondary md:h-80">
                                 <img
-                                    src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                    src={heroImage}
                                     alt="Library Interior"
                                     className="h-full w-full object-cover"
                                 />
