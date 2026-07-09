@@ -26,6 +26,9 @@ COPY --from=frontend /app/public/build/ ./public/build/
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache \
     && chmod -R 775 /app/storage /app/bootstrap/cache
 
+# optimize but not config
+RUN php artisan optimize && php artisan storage:link && php artisan config:clear
+
 EXPOSE 80
 EXPOSE 443
 EXPOSE 443/udp
