@@ -1,3 +1,11 @@
+import {
+    AlertDialog,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -31,6 +39,7 @@ interface BookReturn {
     fine_status: 'no_fine' | 'unpaid' | 'paid';
     fine_paid_at: string | null;
     notes: string | null;
+    payment_proof: string | null;
 }
 
 interface ShowReturnProps {
@@ -199,10 +208,7 @@ export default function ShowReturn({ returnData }: ShowReturnProps) {
                                     {/* Returned Date */}
                                     <div className="flex gap-3">
                                         <div className="flex flex-col items-center">
-                                            <RotateCcw
-                                                    size={14}
-                                                    className={returnData.status === 'on_time' ? 'text-primary' : 'text-destructive'}
-                                                />
+                                            <RotateCcw size={14} className={returnData.status === 'on_time' ? 'text-primary' : 'text-destructive'} />
                                         </div>
                                         <div className="flex-1">
                                             <p className="text-sm font-medium text-foreground">Dikembalikan</p>
@@ -222,10 +228,7 @@ export default function ShowReturn({ returnData }: ShowReturnProps) {
                             >
                                 <CardHeader className="pb-2">
                                     <div className="flex items-center gap-3">
-                                        <CreditCard
-                                                size={20}
-                                                className={returnData.fine_status === 'paid' ? 'text-primary' : 'text-destructive'}
-                                            />
+                                        <CreditCard size={20} className={returnData.fine_status === 'paid' ? 'text-primary' : 'text-destructive'} />
                                         <CardTitle className="text-base">Informasi Denda</CardTitle>
                                     </div>
                                 </CardHeader>
@@ -240,6 +243,41 @@ export default function ShowReturn({ returnData }: ShowReturnProps) {
                                             <span className="text-sm text-muted-foreground">Total Denda</span>
                                             <span className="text-lg font-bold text-foreground">{formatCurrency(returnData.fine_amount)}</span>
                                         </div>
+
+                                        {returnData.payment_proof && (
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-sm text-muted-foreground">Bukti Pembayaran</span>
+                                                {/* View Payment Proof Dialog */}
+                                                <AlertDialog>
+                                                    <AlertDialogTrigger asChild>
+                                                        <Button variant="link" size="sm" className="p-0 text-right">
+                                                            Lihat Bukti
+                                                        </Button>
+                                                    </AlertDialogTrigger>
+                                                    <AlertDialogContent className="max-w-md">
+                                                        <AlertDialogHeader>
+                                                            <AlertDialogTitle>Bukti Pembayaran</AlertDialogTitle>
+                                                        </AlertDialogHeader>
+                                                        <div className="py-4">
+                                                            {returnData?.payment_proof && (
+                                                                <img
+                                                                    src={returnData.payment_proof}
+                                                                    alt="Bukti pembayaran"
+                                                                    className="w-full rounded-xl border border-border object-contain"
+                                                                />
+                                                            )}
+                                                        </div>
+
+                                                        <AlertDialogCancel asChild>
+                                                            <Button variant="outline" className="w-full">
+                                                                Tutup
+                                                            </Button>
+                                                        </AlertDialogCancel>
+                                                    </AlertDialogContent>
+                                                </AlertDialog>
+                                            </div>
+                                        )}
+
                                         <div className="flex items-center justify-between">
                                             <span className="text-sm text-muted-foreground">Status</span>
                                             {returnData.fine_status === 'paid' ? (

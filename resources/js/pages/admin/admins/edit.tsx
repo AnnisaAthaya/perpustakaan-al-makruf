@@ -85,9 +85,9 @@ export default function EditAdmin({ admin }: EditAdminProps) {
 
     // Format date for display in info box
     const formatPasswordPreview = (dateStr: string): string => {
-        if (!dateStr) return 'almaruf2024';
+        if (!dateStr) return 'almaruf2026';
         const date = new Date(dateStr);
-        if (isNaN(date.getTime())) return 'almaruf2024';
+        if (isNaN(date.getTime())) return 'almaruf2026';
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();

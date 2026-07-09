@@ -1,11 +1,11 @@
 import type { LoanDetailItem } from '@/components/generated-components/loan-detail-dialog';
-import { Button } from '@/components/ui/button';
 import { ModalShell } from '@/components/generated-components/modal-shell';
+import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { getCategoryColorSolid } from '@/lib/utils';
 import { BookMarked, Loader2 } from 'lucide-react';
 import { useState } from 'react';
-import { getCategoryColorSolid } from '@/lib/utils';
 
 interface CancelLoanDialogProps {
     loan: LoanDetailItem | null;
@@ -96,7 +96,7 @@ export function CancelLoanDialog({ loan, open, onOpenChange, onConfirm, isLoadin
                 </div>
 
                 {/* Warning */}
-                <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 card-accent-left">
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
                     <p className="text-sm text-amber-800">
                         Setelah dibatalkan, stok buku akan dikembalikan dan Anda dapat mengajukan permintaan peminjaman kembali.
                     </p>

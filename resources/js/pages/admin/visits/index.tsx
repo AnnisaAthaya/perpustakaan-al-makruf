@@ -8,7 +8,7 @@ import AdminLayout from '@/layouts/admin/admin-layout';
 import { LibraryVisit, PaginatedData } from '@/types';
 import { Head, router } from '@inertiajs/react';
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { BookUser, Calendar, ChevronLeft, ChevronRight, FileText, Search, TrendingUp, Users } from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight, FileText, Search, TrendingUp, Users } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 
 interface PageProps {
@@ -189,24 +189,9 @@ export default function Index({ visits, stats, filters }: PageProps) {
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                    <StatsCard
-                        icon={Calendar}
-                        label="Hari Ini"
-                        value={`${stats.today} Siswa`}
-                        
-                    />
-                    <StatsCard
-                        icon={TrendingUp}
-                        label="Minggu Ini"
-                        value={`${stats.this_week} Siswa`}
-                        
-                    />
-                    <StatsCard
-                        icon={Users}
-                        label="Bulan Ini"
-                        value={`${stats.this_month} Siswa`}
-                        
-                    />
+                    <StatsCard icon={Calendar} label="Hari Ini" value={`${stats.today} Siswa`} />
+                    <StatsCard icon={TrendingUp} label="Minggu Ini" value={`${stats.this_week} Siswa`} />
+                    <StatsCard icon={Users} label="Bulan Ini" value={`${stats.this_month} Siswa`} />
                 </div>
 
                 {/* Filters */}
@@ -258,7 +243,6 @@ export default function Index({ visits, stats, filters }: PageProps) {
                 {visits.data.length === 0 ? (
                     <Card>
                         <CardContent className="py-16 text-center">
-                            <BookUser size={48} className="text-muted-foreground" />
                             <h3 className="text-lg font-semibold text-foreground">Tidak Ada Data</h3>
                             <p className="mt-2 text-sm text-muted-foreground">Tidak ada kunjungan untuk tanggal yang dipilih.</p>
                         </CardContent>

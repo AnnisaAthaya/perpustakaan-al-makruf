@@ -31,7 +31,7 @@ class AdminManagementController extends Controller
             ->orderBy('name')
             ->paginate(20)
             ->withQueryString()
-            ->through(fn (User $user) => [
+            ->through(fn(User $user) => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'nis' => $user->nis,

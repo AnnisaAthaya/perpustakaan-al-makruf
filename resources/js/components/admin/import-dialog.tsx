@@ -1,6 +1,6 @@
+import { ModalShell } from '@/components/generated-components/modal-shell';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { ModalShell } from '@/components/generated-components/modal-shell';
 import { useForm, usePage } from '@inertiajs/react';
 import { AlertCircle, CheckCircle2, Upload, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -165,7 +165,7 @@ export function ImportDialog({ open, onOpenChange, title, description, actionUrl
 
                         {!data.csv ? (
                             <>
-                                <Upload className="size-8 text-primary" />
+                                <Upload className="mx-auto size-8 text-primary" />
                                 <h3 className="mb-2 text-lg font-semibold text-foreground">Pilih file CSV atau drag & drop di sini</h3>
                                 <p className="text-sm text-muted-foreground">File CSV dengan ukuran maksimal 10MB</p>
                             </>

@@ -189,11 +189,9 @@
 
     /* Accent left border — pengganti gradient section */
     .card-accent-left {
-        border-left: 3px solid oklch(59.6% 0.145 163.225);
     }
 
     .card-accent-left-danger {
-        border-left: 3px solid oklch(55% 0.22 27);
     }
 
     /* Font serif override — forced to sans */

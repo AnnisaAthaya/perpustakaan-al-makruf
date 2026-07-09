@@ -1,5 +1,6 @@
 import AdminNavbar from '@/components/admin/admin-navbar';
 import AdminSidebar from '@/components/admin/admin-sidebar';
+import { useFlashToast } from '@/hooks/use-flash-toast';
 import { usePage } from '@inertiajs/react';
 import { ReactNode, useState } from 'react';
 
@@ -9,6 +10,7 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    useFlashToast();
     const { url } = usePage();
 
     return (

@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button';
 import { ModalShell } from '@/components/generated-components/modal-shell';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Link } from '@inertiajs/react';
-import { BookMarked, Clock, MapPin, XCircle } from 'lucide-react';
 import { getCategoryColorSolid } from '@/lib/utils';
+import { Link } from '@inertiajs/react';
+import { BookMarked, Clock, MapPin } from 'lucide-react';
 
 export interface BorrowResultBook {
     id: number;
@@ -26,11 +26,11 @@ export function BorrowResultDialog({ open, onOpenChange, success, book, message 
         <ModalShell
             open={open}
             onOpenChange={onOpenChange}
-            title={success ? "Permintaan Terkirim!" : "Permintaan Gagal"}
+            title={success ? 'Permintaan Terkirim!' : 'Permintaan Gagal'}
             description={
                 success
-                    ? (message || 'Permintaan peminjaman buku berhasil dikirim. Menunggu konfirmasi dari admin perpustakaan.')
-                    : (message || 'Maaf, terjadi kesalahan saat memproses permintaan peminjaman buku.')
+                    ? message || 'Permintaan peminjaman buku berhasil dikirim. Menunggu konfirmasi dari admin perpustakaan.'
+                    : message || 'Maaf, terjadi kesalahan saat memproses permintaan peminjaman buku.'
             }
             size="md"
             footer={
@@ -47,12 +47,6 @@ export function BorrowResultDialog({ open, onOpenChange, success, book, message 
             }
         >
             <div className="flex flex-col gap-6 text-center sm:text-left">
-                {success ? (
-                    <Clock size={32} className="text-amber-600" />
-                ) : (
-                    <XCircle size={32} className="text-red-600" />
-                )}
-
                 {success && book && (
                     <div className="flex flex-col gap-6 text-left">
                         <Separator />

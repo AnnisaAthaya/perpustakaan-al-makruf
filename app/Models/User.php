@@ -131,7 +131,7 @@ class User extends Authenticatable
 
                 $roman = [10 => 'X', 11 => 'XI', 12 => 'XII'];
 
-                return ($roman[$this->grade] ?? $this->grade).' '.$this->class_name;
+                return ($roman[$this->grade] ?? $this->grade) . ' ' . $this->class_name;
             }
         );
     }
@@ -167,7 +167,7 @@ class User extends Authenticatable
     public function hasUnpaidFines(): bool
     {
         return $this->loans()
-            ->whereHas('fine', fn ($q) => $q->whereNot('status', 'paid'))
+            ->whereHas('fine', fn($q) => $q->whereNot('status', 'paid'))
             ->exists();
     }
 
@@ -237,7 +237,11 @@ class User extends Authenticatable
     public function resetPasswordToDefault(): void
     {
         if (! $this->date_of_birth) {
-            throw new \RuntimeException('Cannot reset password: date of birth is not set.');
+            $this->update([
+                'password' => Hash::make('almaruf2026'),
+                'password_changed_at' => null,
+            ]);
+            return;
         }
 
         $this->update([

@@ -1,5 +1,6 @@
 import Navbar from '@/components/navbar';
 import Sidebar from '@/components/sidebar';
+import { useFlashToast } from '@/hooks/use-flash-toast';
 import { ReactNode, useState } from 'react';
 
 interface MainLayoutProps {
@@ -12,6 +13,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children, rightSidebar, hideLeftSidebar = false }: MainLayoutProps) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    useFlashToast();
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);

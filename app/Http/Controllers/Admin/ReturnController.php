@@ -121,12 +121,17 @@ class ReturnController extends Controller
         $fineStatus = 'no_fine';
         $fineAmount = 0;
         $finePaidAt = null;
+        $paymentProofUrl = null;
 
         if ($hasFine) {
             $fineStatus = $loan->fine->status->value;
             $fineAmount = (int) $loan->fine->amount;
             $finePaidAt = $loan->fine->status === FineStatus::Paid && $loan->fine->verified_at
                 ? $loan->fine->verified_at
+                : null;
+
+            $paymentProofUrl = $loan->fine->payment_proof
+                ? StorageService::url($loan->fine->payment_proof, FileType::PaymentProof)
                 : null;
         }
 
@@ -154,6 +159,7 @@ class ReturnController extends Controller
             'fine_status' => $fineStatus,
             'fine_paid_at' => $finePaidAt,
             'notes' => $loan->notes,
+            'payment_proof' => $paymentProofUrl,
         ];
 
         return Inertia::render('admin/returns/show', [

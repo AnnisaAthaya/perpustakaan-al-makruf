@@ -53,21 +53,8 @@ function RequirementItem({ requirement }: { requirement: Requirement }) {
     );
 }
 
-function StatsCard({ icon: Icon, label, value, subtitle }: { icon: React.ElementType; label: string; value: string | number; subtitle?: string }) {
-    return (
-        <Card>
-            <CardContent className="flex items-center justify-between p-5">
-                <div>
-                    <p className="text-sm font-medium text-muted-foreground">{label}</p>
-                    <p className="mt-1 text-3xl font-bold text-foreground">{value}</p>
-                    {subtitle && <p className="mt-1 text-xs text-muted-foreground">{subtitle}</p>}
-                </div>
-                <Icon size={28} className="shrink-0 text-primary" />
-            </CardContent>
-        </Card>
-    );
-}
 function EligibleStatusCard() {
+    return null;
     return (
         <Card className="overflow-hidden border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white">
             <CardContent className="p-6">
@@ -97,7 +84,7 @@ function EligibleStatusCard() {
 
 function NotEligibleStatusCard() {
     return (
-        <Card className="overflow-hidden border-2 border-red-200 bg-gradient-to-br from-red-50 to-white">
+        <Card className="overflow-hidden border-2 border-red-200 from-red-50 to-white">
             <CardContent className="p-6">
                 <div className="flex flex-col items-center text-center">
                     <h2 className="text-xl font-bold text-red-800">Anda Belum Bebas Pustaka</h2>

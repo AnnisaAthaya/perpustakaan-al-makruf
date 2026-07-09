@@ -35,7 +35,7 @@ class UserController extends Controller
             ->orderBy('name')
             ->paginate(20)
             ->withQueryString()
-            ->through(fn (User $user) => [
+            ->through(fn(User $user) => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'nis' => $user->nis,
@@ -118,7 +118,7 @@ class UserController extends Controller
             abort(404);
         }
 
-        $membershipStatuses = collect(MembershipStatus::cases())->map(fn (MembershipStatus $status) => [
+        $membershipStatuses = collect(MembershipStatus::cases())->map(fn(MembershipStatus $status) => [
             'value' => $status->value,
             'label' => $status->label(),
         ]);
