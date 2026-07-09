@@ -19,7 +19,7 @@ FROM composer:2.7 AS vendor
 WORKDIR /app
 COPY database/ database/
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --ignore-platform-reqs --no-interaction --prefer-dist --optimize-autoloader
+RUN composer install --no-dev --ignore-platform-reqs --no-interaction --prefer-dist --optimize-autoloader --no-scripts
 
 # Stage 3: Final Production Image (FrankenPHP)
 FROM dunglas/frankenphp:php8.4-alpine
