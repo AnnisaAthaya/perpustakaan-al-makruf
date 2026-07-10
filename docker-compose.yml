@@ -16,7 +16,7 @@ services:
       - APP_DEBUG=${APP_DEBUG}
       - APP_URL=${APP_URL}
       - APP_KEY=${APP_KEY}
-      - SERVER_NAME=${DOMAIN_NAME}
+      # - SERVER_NAME=${DOMAIN_NAME}
       - DB_CONNECTION=${DB_CONNECTION}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
@@ -28,8 +28,8 @@ services:
     volumes:
       - ./storage:/app/storage
       - ./bootstrap/cache:/app/bootstrap/cache
-      - caddy_data:/data
-      - caddy_config:/config
+      # - caddy_data:/data
+      # - caddy_config:/config
     depends_on:
       - db
     networks:
@@ -60,5 +60,5 @@ networks:
 
 volumes:
   db_data:
-  caddy_data:
-  caddy_config:
+  # caddy_data:
+  # caddy_config:
