@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+    # ports:
+    #   - "80:80"
+    #   - "443:443"
+    #   - "443:443/udp"
     environment:
       - APP_ENV=${APP_ENV}
       - APP_DEBUG=${APP_DEBUG}
@@ -32,7 +32,12 @@ services:
     depends_on:
       - db
     networks:
-      - laravel_network
+      - proxy_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.laravel.rule=Host(`perpustakaan-al-maruf.my.id`)"
+      - "traefik.http.routers.laravel.entrypoints=websecure"
+      - "traefik.http.routers.laravel.tls.certresolver=myresolver"
 
   db:
     image: mysql:8.0
@@ -45,11 +50,11 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     networks:
-      - laravel_network
+      - proxy_network
 
 networks:
-  laravel_network:
-    driver: bridge
+  proxy_network:
+    external: true
 
 volumes:
   db_data:
