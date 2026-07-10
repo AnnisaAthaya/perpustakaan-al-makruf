@@ -25,6 +25,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - LOG_CHANNEL=stderr
       - LOG_LEVEL=debug
+      - DOCKER_API_VERSION=1.41
     volumes:
       - ./storage:/app/storage
       - ./bootstrap/cache:/app/bootstrap/cache
